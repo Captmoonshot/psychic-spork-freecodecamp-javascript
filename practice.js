@@ -407,6 +407,91 @@ console.log();
 // Else-If is an alternative to plain If-Else statements
 // But order matters with If-Else statements
 
+function orderMyLogic(val) {
+    if (val < 10) {
+        return "Less than 10";
+    } else if (val < 5) {
+        return "Less than 5";
+    } else {
+        return "Greater than or Equal to 10";
+    }
+}
+console.log(orderMyLogic(9));
+console.log(orderMyLogic(3));
+console.log();
+
+// If you try to run the above code with orderMyLogic(3) you won't get the expected result because
+// the order matters with if-else statements, so the conditional if (val < 5) must come before 
+// if (val < 10).
+
+function orderMyLogic(val) {
+    if (val < 5 ) {
+        return "Less than 5";
+    } else if (val < 10) {
+        return "Less than 10";
+    } else {
+        return "Greater than or equal to 10";
+    }
+}
+console.log(orderMyLogic(3));       // Less than 5
+console.log();
+
+// Exercise: Write chained if-else statements
+
+function getSize(num) {
+    if (num < 5) {
+        return "Tiny";
+    } else if (num < 10) {
+        return "Small";
+    } else if (num < 15) {
+        return "Medium";
+    } else if (num < 20) {
+        return "Large";
+    } else {
+        return "Huge";
+    }
+}
+console.log(getSize(25));   // Huge
+console.log();
+
+// Exercise: Golf Score
+
+/* Strokes      Return
+    1           "Hole in One"
+    <= par - 2  "Eagle"
+    par - 1     "Birdie"
+    par         "Par"
+    par + 1     "Bogey"
+    par + 2     "Double bogey"
+    >= par + 3  "Go Home!"
+*/
+
+var names = ["Hole-in-One!", "Eagle", "Birdie", "Par",
+            "Bogey", "Double bogey", "Go Home!"]
+
+function golfScore(par, strokes) {
+    if (strokes == 1) {
+        return names[0];
+    } else if (strokes <= par - 2) {
+        return names[1];
+    } else if (strokes == par - 1) {
+        return names[2];
+    } else if (strokes == par) {
+        return names[3];
+    } else if (strokes == par + 1) {
+        return names[4];
+    } else if (strokes == par + 2) {
+        return names[5];
+    } else if (strokes >= par + 3) {
+        return names[6];
+    }
+}
+console.log(golfScore(5, 5));   // Par
+console.log(golfScore(5, 1));   // Hole-in-One
+console.log(golfScore(5, 8));   // Go Home!
+console.log();
+
+// Switch statements
 
 
 
