@@ -492,13 +492,169 @@ console.log(golfScore(5, 8));   // Go Home!
 console.log();
 
 // Switch statements
+    // An alternative to If-Else statements
 
+function caseInSwitch(val) {
+    var answer = "";
+    switch(val) {
+        case 1:  // no type conversion, val has to be integer 1
+            answer = "alpha";
+            break;
+        case 2:
+            answer = "beta";
+            break;
+        case 3:
+            answer = "delta";
+            break;
+    }
+    return answer;
+}
 
+console.log(caseInSwitch(1));       // alpha
+console.log(caseInSwitch("1"));     // nothing happens because "1" isn't a case
+console.log();
 
+// Default Option in Switch Statements
+    // kind of like else in an If-Else statement
 
+function switchOfStuff(val) {
+    var answer = "";
+    switch(val) {
+        case "a":
+            answer = "apple";
+            break;
+        case "b":
+            answer = "bird";
+            break;
+        case "c":
+            answer = "cat";
+            break;
+        default:
+            answer = "stuff";
+            break;
+    }
+    return answer;
+}
+console.log(switchOfStuff("c"));    // cat
+console.log(switchOfStuff("whatever"));     // stuff
+console.log();
 
+// Multiple Identical Options in Switch Statements
 
+function sequentialSizes(val) {
+    var answer = "";
+    switch(val) {
+        case 1:
+        case 2: 
+        case 3:
+            answer = "Low";
+            break;
+        case 4:
+        case 5:
+        case 6:
+            answer = "High";
+            break;
+    }
+    return answer;
+}
+console.log(sequentialSizes(2));    // Low
+console.log(sequentialSizes(5));    // High
+console.log();
 
+// Return Boolean values from functions
 
+function isLess(a, b) {
+    if (a < b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(isLess(10, 5));
 
+// However all comparison operators return a Boolean so a better way to write it would be
+function isLessBetter(a, b) {
+    return (a < b);
+}
+console.log(isLessBetter(10, 5));       // false
+console.log(isLessBetter(1, 3));        // true
+
+// Return early from functions with the return statement
+
+function abTest(a, b) {
+    if (a < 0 || b < 0) {
+        return undefined;
+    }
+    return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
+}
+console.log(abTest(3, 4));      // 14
+console.log(abTest(-3, 4));     // undefined
+console.log();
+
+// Counting Cards
+
+var count = 0;
+function cc(card) {
+    switch(card) {
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            count++;
+            break;
+        case 10:
+        case "J":
+        case "Q":
+        case "K":
+        case "A":
+            count--;
+            break;
+    }
+    var holdbet = "Hold";
+    if (count > 0) {
+        holdbet = "Bet";
+    }
+    return count + " " + holdbet;
+}
+cc(2); cc("K"); cc(10); cc("K"); cc("A");
+console.log(cc(4));         // Hold
+console.log();
+
+// Build JavaScript Objects
+    // kind of like arrays, but instead of using indexes 
+    // you use properties
+
+var ourDog = {
+    "name": "Camper",
+    "legs": 4,
+    "tails": 1,
+    "friends": ["everything!"]
+};
+
+// Access Object Properties with Dot Notation
+var testObj = {
+    "hat": "ballcap",
+    "shirt": "jersey",
+    "shoes": "cleats"
+};
+
+var hatValue = testObj.hat      // ballcap
+var shirtValue = testObj.shirt  // jersey
+console.log(hatValue, shirtValue);
+console.log();
+
+// Access Object Properties with Bracket Notation
+    // the bracket notation is required if the name of the value or key of the value
+    // has a space in it like here
+var testObj = {
+    "an entree": "hamburger",
+    "my side": "veggies",
+    "the drink": "water"
+};
+
+var entreeValue = testObj["an entree"];
+var drinkValue = testObj["the drink"];
+console.log(entreeValue, drinkValue);
+console.log();
 
