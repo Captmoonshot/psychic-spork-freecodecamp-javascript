@@ -1,10 +1,4 @@
-var myArray = [];
-var i = 10;
-
-do {
-    myArray.push(i);
-    i++;
-} while (i < 5)
-
-console.log(i, myArray);    // 11 10
-console.log();
+function randomWholeNum() {
+    return Math.floor(Math.random() * 10);
+}
+console.log(randomWholeNum());
