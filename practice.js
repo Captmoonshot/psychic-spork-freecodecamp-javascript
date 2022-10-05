@@ -867,3 +867,98 @@ console.log(updateRecords(5439, "artist", "ABBA"));
 console.log();
 
 // Iterate with While Loops
+var myArray = [];
+var i = 0;
+while (i < 5) {
+    myArray.push(i);
+    i++;
+}
+console.log(myArray);
+console.log();
+
+// Iterate with For Loops
+    // You can do the same as above using a for-loop
+var myArray = [];
+for (var i = 0; i < 5; i++) {
+    myArray.push(i);
+}
+console.log(myArray);
+console.log();
+// all you're doing is putting together within the parentheses
+// the var i = 0 (the initializer); i < 5 (the condition); i++ (the increment).
+
+// Iterate Odd Numbers with a For-Loop
+function oddNumbers() {
+    var oddArray = [];
+    for (var i = 1; i < 10; i+=2) {
+        oddArray.push(i);
+    }
+    return oddArray;
+}
+console.log(oddNumbers());
+console.log();
+
+// Count Backwards with a For-Loop
+var ourArray = [];
+for (var i=10; i>0; i-=2) {
+    ourArray.push(i);
+}
+console.log(ourArray);
+console.log();
+
+// Iterate through an Array with a For-Loop
+var ourArr = [9, 10, 11, 12];
+var ourTotal = 0;
+
+for (var i=0; i < ourArr.length; i++) {
+    ourTotal += ourArr[i];
+}
+console.log(ourTotal);
+console.log();
+
+// Nesting For-Loops
+function multiplyAll(arr) {
+    var product = 1;
+    for (var i=0; i < arr.length; i++) {
+        for (var j=0; j < arr[i].length; j++) {
+            product *= arr[i][j];
+        }
+    }
+    return product;
+}
+var result = multiplyAll([[1, 2], [3, 4], [5, 6]]);
+
+console.log(result);
+console.log();
+
+// Iterate with Do-While Loop
+    // We know that a while loop works in the following way
+var myArray = [];
+var i = 10;
+
+while(i < 5) {
+    myArray.push(i);
+    i++;
+}
+
+console.log(i, myArray);
+// This while loop never starts because it's initialized at 10 and the condition specifies
+// while i < 5.
+
+// A regular while loop always checks the condition before trying to run the loop.
+
+// A Do-While Loop on the otherhand will always run the loop one time before checking the condition.
+// So if we rewrote the above while loop to a do-while loop:
+var myArray = [];
+var i = 10;
+
+do {
+    myArray.push(i);
+    i++;
+} while (i < 5)
+
+console.log(i, myArray);    // 11 [10]
+console.log();
+// This works because it runs the loop before checking the condition.
+
+
