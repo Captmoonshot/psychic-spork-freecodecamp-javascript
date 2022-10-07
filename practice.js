@@ -1025,4 +1025,202 @@ console.log();
 function ourRandomRange(ourMin, ourMax) {
     return Math.floor(Math.random() * (ourMax - ourMin + 1)) + ourMin;
 }
-ourRandomRange(1, 9);
+var randomArray = [];
+for (var i=0; i < 100; i++) {
+    var data = ourRandomRange(1, 10);   // between 1 and 10 inclusive
+    randomArray.push(data);
+}
+console.log(randomArray);
+console.log();
+
+// parseInt function
+    // Takes a String and returns an Integer
+    // If it can't be converted it returns NAN for "Not A Number".
+function convertToInteger(str) {
+    return parseInt(str);
+}
+console.log(convertToInteger("42"));
+console.log();
+
+// Use the parseInt Function with a Radix
+    // allows you to pass in binary numbers like base 2
+function convertToInteger(str) {
+    return parseInt(str, 2);
+}
+console.log(convertToInteger("10011"));     // 19
+console.log();
+
+// Use the Conditional (Ternary) Operator
+    // Kind of like a one-line If-Else expression
+    // syntax:
+// condition ? statement-if-true : statement-if-false;
+function checkEqual(a, b) {
+    if (a === b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+// Instead of doing something verbose like above
+function checkEqual(a, b) {
+    return a === b ? true : false;
+}
+console.log(checkEqual(3, 3));      // true
+console.log(checkEqual(5, 4));      // false
+console.log();
+
+// Multiple Ternary Operator
+function checkSign(num) {
+    return num > 0 ? "positive" : num < 0 ? "negative" : "zero";
+}
+console.log(checkSign(5));
+console.log(checkSign(-5));
+console.log(checkSign(0));
+console.log();
+
+// Differences Between the var and let Keywords
+    // For a long time in JS when you declared a variable you had to use the var keyword
+    // but starting with ES6 you could also use let and const keywords.
+var catName = "Quincy";
+var quote;
+
+console.log("catName: " + catName);
+
+var catName = "Beau";
+console.log("catName: " + catName);
+
+function catTalk() {
+    "use strict";       // enables strict mode which catches coding mistakes
+    catName = "Oliver";
+    quote = catName + " says Meow!";
+    return quote;
+}
+console.log(catTalk());
+console.log();
+// The main difference is that let doesn't let you declare a variable twice like var does
+// let catName = "Quincy";
+// console.log(catName);
+// let catName = "Beau";       // SyntaxError: Identifier 'catName' has already been declared
+// console.log(catName);
+// console.log();
+
+// Compare Scopes of the var and let keywords
+    // when you declare variables with var you can declare it both globally
+    // and locally within a function.
+    // However, let is limited to only the code block or expression that it's used in.
+function checkScope() {
+    "use strict";
+    var i = "function scope";
+    if (true) {
+        i = "block scope";
+        console.log("Block scope i is: ", i);
+    }
+    console.log("Function scope i is: ", i);
+    return i;
+}
+console.log(checkScope());  // Block scope i is block scope, Function scope is block scope
+console.log();
+// if we want the function scope i to be function scope then we have to use let
+function checkScope() {
+    "use strict";
+    let i = "function scope";
+    if (true) {
+        let i = "block scope";
+        console.log("Block scope i is: ", i);
+    }
+    console.log("Function scope i is: ", i);
+    return i;
+}
+console.log(checkScope());
+console.log();
+// Try to use let for variable declaration for safety
+
+// Declare a Read-Only Variable with the const Keyword
+    // const is kind of like let except it's read-only.
+    // You cannot re-assign a const.
+function printManyTimes(str) {
+    "use strict";
+    var sentence = str + " is cool!";
+    for (var i = 0; i < str.length; i+=2) {     //0, 2, 4, 6, 8, 10 -> 6 times
+        console.log(sentence);
+    }
+}
+// printManyTimes("freecodecamp");
+// // If you run the above function with const SENTENCE instead of var sentence
+//     // you'll get a read-only error.
+// function printManyTimes(str) {
+//     "use strict";
+//     const SENTENCE = str + " is cool!";
+
+//     SENTENCE = str + " is amazing!";    // TypeError: Assignment to constant variable
+//     for (var i = 0; i < str.length; i+=2) {
+//         console.log(SENTENCE);
+//     }
+// }
+// printManyTimes("freecodecamp");
+console.log();
+
+// Mutate an Array Declared with const
+const s = [5, 7, 2];
+function editInPlace() {
+    "use strict";
+
+    s = [2, 5, 7];      // TypeError: Assignment to constant variable
+}
+editInPlace();
+console.log(s);
+// We can however update the array using bracket notation
+
+const s = [5, 7, 2];
+function editInPlace() {
+    "use strict";
+
+    s[0] = 2;
+    s[1] = 5;
+    s[2] = 7;
+}
+editInPlace();
+console.log(s);     // [2, 5, 7]
+console.log();
+
+// Prevent Object Mutation
+    // If you have an obj or an array, you can still
+    // mutate it even it's declared with const
+function freezeObj() {
+    "use strict";
+    const MATH_CONSTANTS = {
+        PI: 3.14
+    };
+    try {
+        MATH_CONSTANTS.PI = 99;
+    } catch( ex ) {
+        console.log(ex);
+    }
+    return MATH_CONSTANTS.PI;
+}
+const PI = freezeObj();
+console.log(PI);        // 99
+// We don't want this type of behavior so let's rewrite the freezeObj() function
+// to prevent this.
+// To do that we're going to use something called Object.freeze() which prevents
+// objects from being mutated.
+function freezeObj() {
+    "use strict";
+    const MATH_CONSTANTS = {
+        PI: 3.14
+    };
+
+    Object.freeze(MATH_CONSTANTS);      // this is it
+
+    try {
+        MATH_CONSTANTS.PI = 99;
+    } catch( ex ) {
+        console.log(ex);                // TypeError: Cannot assign to read only property 'PI' of object '#<Object>'
+    }
+    return MATH_CONSTANTS.PI;
+}
+const PI = freezeObj();
+console.log(PI);                        // 3.14
+console.log();
+
+// Use Arrow Functions to Write Concise Anonymous Functions
