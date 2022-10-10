@@ -1,21 +1,6 @@
-function Person() {
-    this.name = "Mike",
-    this.age = 22,
-    this.hobbies = ["reading", "games", "coding"],
-    this.greet = function() {
-        console.log("Hello");
-    }
-    this.score = {
-        maths: 96,
-        science: 80
-    }
+function increment(number, value=1) {
+    return number + value;
 }
-
-const person = new Person();
-
-console.log(typeof person);     // object
-
-console.log(person.name);
-console.log(person["hobbies"][0]);
-person.greet();
-console.log(person.score["maths"]);
+console.log(increment(5, 2));
+console.log(increment(5));
+console.log();

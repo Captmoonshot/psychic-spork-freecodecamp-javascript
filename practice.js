@@ -1224,3 +1224,69 @@ console.log(PI);                        // 3.14
 console.log();
 
 // Use Arrow Functions to Write Concise Anonymous Functions
+    // Below is an anonymous function.
+    // It doesn't have a name but is assigned to variable called magic.
+var magic = function() {
+    return new Date();
+}
+console.log(magic());
+// Whenver you have an anonymous function you can use the arrow function
+// which makes it a little quicker to write.
+const magic = () => new Date();
+console.log(magic());
+console.log();
+
+// Arrow Functions with Parameters
+    // Here we have a function that simply concats or extends two separate arrays.
+var myConcat = function(arr1, arr2) {
+    return arr1.concat(arr2);
+}
+console.log(myConcat([1, 2], [3, 4, 5]));
+// We can re-write the above function as an Arrow Function
+    // The curly braces and the return keyword 
+    // aren't necessary if all we're doing is returning something,
+    // but I include it here to be explicit.
+const myConcat = (arr1, arr2) => {
+    return arr1.concat(arr2);
+}
+console.log(myConcat([1, 2], [3, 4, 5]));
+console.log();
+
+// Higher Order Arrow Functions
+    // Like Map, Filter, Reduce
+    // Take functions as arguments for processing collections of data.
+
+// Here we want to compute the square of positive integers
+const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+
+const squareList = (arr) => {
+    const squaredIntegers = arr.filter(num => Number.isInteger(num) && num > 0).map(x => x * x);
+    return squaredIntegers;
+};
+
+const squaredIntegers = squareList(realNumberArray);
+console.log(squaredIntegers);
+
+// Default Parameters
+    // The default parameter kicks in when the argument isn't specified.
+const increment = (function() {
+    return function increment(number, value=1) {        // value default parameter is 1
+        return number + value;
+    };
+})();
+console.log(increment(5, 2));       // 7
+console.log(increment(5));          // 6
+console.log();
+
+// I'm not sure what is going on in the above code looks like an anonymous function
+// assigned to a const.
+
+// But below is a normal function with default parameter.
+
+function increment(number, value=1) {
+    return number + value;
+}
+console.log(increment(5, 2));
+console.log(increment(5));
+console.log();
+
