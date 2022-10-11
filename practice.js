@@ -1290,3 +1290,309 @@ console.log(increment(5, 2));
 console.log(increment(5));
 console.log();
 
+// Use the Rest Operator with Function Paramters
+    // Allows you to create a function that takes in a variable number of
+    // arguments.
+const sum = (function() {
+    // Here we have a function that allows us to sum the three arguments
+    return function sum(x, y, z) {
+        const args = [x, y, z];
+        return args.reduce((a, b) => a + b, 0);
+    };
+})();
+console.log(sum(1, 2, 3));      // 6
+
+// we can rewrite this function to the the rest operator
+// which are the three dots followed by args.
+const mySum = (function() {
+    return function mySum(...args) {
+        return args.reduce((a, b) => a + b, 0);
+    };
+})();
+console.log(mySum(1, 2, 3));
+// The real benefit is that we can pass an arbitrary number of arguments
+// like *args in Python.
+console.log(mySum(1, 2, 3, 4, 5));      // 15
+
+// Use the Spread Operator to Evaluate Arrays In-Place
+    // Takes in an array and spreads it out into its individual parts.
+const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+let arr2;
+(function() {
+    arr2 = arr1;
+    arr1[0] = 'potato';
+})();
+console.log(arr2);
+// [ 'potato', 'FEB', 'MAR', 'APR', 'MAY' ]
+// changin arr1[0] also mutated arr2.
+// But if we want arr2 to act like a copy of arr1 we can use the 
+// spread operator
+// by making arr1 into [...arr1]
+const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+let arr2;
+(function() {
+    arr2 = [...arr1];       // spread operator
+    arr1[0] = 'potato';
+})();
+console.log(arr2);
+// [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY' ]
+
+// Use Destructuring Assignment to Assign Variables from Objects
+    // Here we have an object instance with 3 properties called x, y, and z.
+    // What if we wanted to create variables out of the three variables?
+    // The old way of doing it would be the following:
+var voxel = {x: 3.6, y: 7.4, z: 6.54};
+var x = voxel.x;    // x = 3.6
+var y = voxel.y;    // y = 7.4
+var z = voxel.z;    // z = 6.54
+console.log(x, y, z);
+console.log();
+
+// The new way of destructuring is a lot less verbose:
+const {x : a, y : b, z : c} = voxel;
+console.log(`a: ${a}, b: ${b}, c: ${c}`);
+
+const AVG_TEMPERATURES = {
+    today: 77.4,
+    tomorrow: 79
+};
+function getTempOfTmrw(avgTemperatures) {
+    "use strict";
+    // get the tomorrow field from AVG_TEMPERATURES and assign it to 'tempOfTomorrow'
+    const { tomorrow : tempOfTomorrow } = avgTemperatures;
+    return tempOfTomorrow;
+}
+console.log(getTempOfTmrw(AVG_TEMPERATURES));       // 79
+
+// Destructuring Assignment with Nested Objects
+const LOCAL_FORECAST = {
+    today: {min: 72, max: 83},
+    tomorrow: {min: 73.3, max: 84.6}
+};
+function getMaxOfTmrw(forecast) {
+    "use strict";
+    // You have to match the level of curly braces to the level of nestedness
+    // of the object.
+    const { tomorrow : { max : maxTomorrow } } = forecast;
+    return maxTomorrow;
+}
+console.log(getMaxOfTmrw(LOCAL_FORECAST));  // 84.6
+
+// Use Destructing Assignment to Assignment Variables from Arrays
+    // The difference between destructuring from objects and arrays is that
+    // with arrays you cannot specify which element goes into which variable.
+    // It just assigns by order.
+const [z, x] = [1, 2, 3, 4, 5, 6];
+console.log(z, x);
+// However, we can use commas like a throwaway variable to get a certain
+// element.
+const [a, b, , c] = [1, 2, 3, 4, 5, 6]; 
+console.log(a, b, c);       // 1, 2, 4
+// You can also use array destructuring to swap variables:
+let a = 8, b = 6;
+(() => {
+    [a, b] = [b, a];
+})();
+console.log(a);     // 6
+console.log(b);     // 8
+console.log();
+
+// Use Destructing Assignment with the Rest Operator
+    // We want to create a function that returns an array
+    // with the first two items removed.
+const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function removeFirstTwo(list) {
+    const [ , , ...arr] = list;     // the two commas represent the first two items of the array
+    return arr;
+}
+const arr = removeFirstTwo(source);
+console.log(arr);
+console.log(source);
+
+// Use Destructuring Assignment to Pass an Object as a Function's Parameters
+    // Commonly used with API calls.
+const stats = {
+    max: 57.78,
+    standard_deviation: 4.34,
+    median: 34.54,
+    mode: 23.87,
+    min: -0.75,
+    average: 35.85
+};
+// The half() function only uses stats.max and stats.min, so what we want
+// here is to only pass in what we need and not the whole stats object.
+// All we need to do is pass in the properties inside of curly braces like so:
+const half = (function() {
+    return function half({ max, min }) {
+        return (max + min) / 2.0;
+    };
+})();
+console.log(stats);
+console.log();
+console.log(half(stats));
+console.log();
+
+// Create Strings Using Template Literals
+    // Like f-strings in Python.
+    // One advantage of using the backticks in Template Literals is it allows you to
+    // print multi-line strings and use both single/double quotes:
+const person = {
+    name: "Zodiac Hasbro",
+    age: 56
+}
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting);
+
+// Exercise
+const result = {
+    success: ["max-length", "no-amd", "prefer-arrow-functions"],
+    failure: ["no-var", "var-on-top", "linebreak"],
+    skipped: ["id-blacklist", "no-dup-keys"]
+};
+/*
+makeList(result.failure) should return:
+[`<li class="text-warning">no-var</li>`,
+  <li class="text-warning">var-on-top</li>`,
+  <li class="text-warning">linebreak</li>`]
+*/
+function makeList(arr) {
+    const resultDisplayArray = [];
+    for (let i = 0; i < arr.length; i++) {
+        resultDisplayArray.push(`<li class="text-warning">${arr[i]}</li>`)
+    }
+    return resultDisplayArray;
+}
+const resultDisplayArray = makeList(result.failure);
+console.log(resultDisplayArray);
+
+// Write Concise Object Literal Declarations Using Simple Fields
+    // Using ES6 you can create Object Literals using the following Arrow function
+    // that returns an Object.
+let createPerson = (name, age, gender) => {
+    return {
+        name: name,
+        age: age,
+        gender: gender
+    };
+};
+console.log(createPerson("Zodiac Hasbro", 56, "male"));
+// But this violates the DRY principle espoused by languages like Python
+const createPerson = (name, age, gender) => ({ name, age, gender });
+console.log(createPerson("Zodiac Hasbro", 56, "male"));
+
+// Write Concise Declarative Functions
+    // An object literal can contain a function i.e. method.
+    // The following is a verbose method of writing a method
+const bicycle = {
+    gear: 2,
+    setGear: function(newGear) {
+        "use strict";
+        this.gear = newGear;
+    }
+};
+bicycle.setGear(3);
+console.log(bicycle.gear);
+// The new way is much more concise because all you have to do is write the function
+// in without the function keyword:
+const car = {
+    transmission: "automatic",
+    setTransmission(newTransmission) {
+        "use strict";
+        this.transmission = newTransmission;
+    }
+};
+console.log(car.transmission);
+car.setTransmission("manual");
+console.log(car.transmission);
+
+// Use class Syntax to Define a Constructor Function
+    // ES6 provides a way to create objects using the class keyword.
+    // This is like a class definition with __init__ in Python.
+// The old way to do it works like this:
+    // SpaceShuttle is the class
+var SpaceShuttle = function(targetPlanet) {
+    this.targetPlanet = targetPlanet;
+}
+var zeus = new SpaceShuttle("Jupiter");
+console.log(zeus);
+console.log(zeus.targetPlanet);
+console.log();
+
+// ES6 uses the class Syntax:
+class SpaceShuttle {
+    constructor(targetPlanet) {
+        this.targetPlanet = targetPlanet;
+    }
+}
+var zeus = new SpaceShuttle("Saturn");
+console.log(zeus);
+console.log(zeus.targetPlanet);
+console.log();
+
+// Let's make a Vegetable class inside of a makeClass() function:
+function makeClass() {
+    class Vegetable {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+    return Vegetable;
+}
+const Vegetable = makeClass();
+const carrot = new Vegetable('carrot');
+console.log(carrot.name);
+
+// Use getters and setters to Control Access to an Object
+    // Methods to get and set an object's properties.
+class Book {
+    constructor(author) {
+        this._author = author;      // private property or attribute
+    }
+    // getter
+    get writer() {
+        return this._author;
+    }
+    // setter
+    set writer(updatedAuthor) {
+        this._author = updatedAuthor;
+    }
+}
+
+// getters and setters for the Thermostat class
+function makeClass() {
+    class Thermostat {
+        constructor(temp) {
+            // toFixed rounds a number to a fixed place but returns a string
+            // so parseFloat converts it back to a number.
+            this._temp = parseFloat((5/9 * (temp - 32)).toFixed(1));
+        }
+        get temperature() {
+            return this._temp;
+        }
+        set temperature(updatedTemp) {
+            var updatedTemp = parseFloat((5/9 * (updatedTemp - 32)).toFixed(1));
+            this._temp = updatedTemp;
+        }
+    }
+    return Thermostat;
+}
+const Thermostat = makeClass();
+const thermos = new Thermostat(76);     // instantiate an Thermostat obj
+console.log(thermos);
+// getters and setters in JS don't use () like functions or methods
+let temp = thermos.temperature;     // getter -> 24.4
+console.log(temp);
+console.log(typeof temp);
+console.log();
+thermos.temperature = 100;           // setter -> 37.8
+temp = thermos.temperature;
+console.log(temp);
+console.log(typeof temp);
+console.log();
+
+// Refer to import_export.js for the final lesson
+// Refer to my_resouces.js and use_resources.js for import * from
+
+// That's it for now
