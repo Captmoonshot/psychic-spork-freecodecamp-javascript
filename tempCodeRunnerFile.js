@@ -1,6 +1,11 @@
-function increment(number, value=1) {
-    return number + value;
-}
-console.log(increment(5, 2));
-console.log(increment(5));
-console.log();
+const myObjects1 = [
+    {id: 'a'},
+    {id: 'b'},
+    {id: 'c'},
+    {
+        id: 'b',
+        name: 'Sammy'
+    }
+];
+const foundIndex1 = myObjects1.findIndex(item => item.id === 'b' && item.name === 'Sammy');
+console.log(foundIndex1);
